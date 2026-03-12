@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Splunk local overrides — never commit these
+local/
+metadata/local.meta
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Distribution artifacts
+*.zip
+*.tar.gz
