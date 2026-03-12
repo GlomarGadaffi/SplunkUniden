@@ -1,0 +1,68 @@
+<dashboard>
+  <label>Sentinel Protocol: RF Telemetry</label>
+  <row>
+    <panel>
+      <title>Active Systems (24h)</title>
+      <chart>
+        <search>
+          <query>sourcetype="uniden:bcd325p2:glg" | stats count by system_name</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>P25 NAC Hits (24h)</title>
+      <chart>
+        <search>
+          <query>sourcetype="uniden:bcd325p2:glg" p25_nac!="NONE" | stats count by p25_nac | sort -count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Modulation Distribution (24h)</title>
+      <chart>
+        <search>
+          <query>sourcetype="uniden:bcd325p2:glg" | stats count by modulation | sort -count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Squelch Opens Over Time</title>
+      <chart>
+        <search>
+          <query>sourcetype="uniden:bcd325p2:glg" squelch_status=1 | timechart span=5m count by system_name</query>
+          <earliest>-4h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.legend.placement">bottom</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Real-Time Intercept Log (60 min)</title>
+      <table>
+        <search>
+          <query>sourcetype="uniden:bcd325p2:glg"
+| table _time, frequency_or_tgid, system_name, group_name, channel_name, modulation, p25_nac, squelch_status
+| sort -_time</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
