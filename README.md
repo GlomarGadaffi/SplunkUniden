@@ -1,4 +1,4 @@
-# tysons-archivist
+# bcd325-splunk-addon
 
 Splunk Technology Add-on for the Uniden BCD325P2 radio scanner. ingests real-time RF telemetry from a serial bridge, parses P25 control channels and EDACS trunking data, emits structured JSON indexed natively in Splunk.
 
